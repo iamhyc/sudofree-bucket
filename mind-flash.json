@@ -2,7 +2,7 @@
     "homepage": "https://github.com/iamhyc/mind-flash",
     "version": "1.0.6",
     "url": "https://github.com/iamhyc/mind-flash/releases/download/v1.0.6/msh-tray-1.0.6-win32.zip#/dl.zip",
-    "hash": "3e9690eb0d96d2e05be38049591ef8fb3fdc2464719e434af88b4809b01629dc",
+    "hash": "6b17badfb0a127aeab0e820d5ccd907d0ced330f26f3b2c5d57aa4ee8d658e15",
     "shortcuts": [
         [ "msh-tray.exe", "Mind Flash Tray" ],
         [ "mf_gui/mf_gui.exe", "Mind Flash" ]
