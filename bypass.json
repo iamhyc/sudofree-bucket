@@ -6,7 +6,7 @@
     "extract_dir": "Bypass",
     "checkver": {
         "url": "https://www.bypass.cn/",
-        "regex": "Version&#xFF1A;([\d.]+)"
+        "regex": "Version&#xFF1A;([\\d.]+)"
     },
     "autoupdate": {
         "url": "https://www.bypass.cn/api/download?name=Bypass.zip#/dl.zip"
