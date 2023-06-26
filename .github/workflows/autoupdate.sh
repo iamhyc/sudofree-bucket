@@ -6,55 +6,6 @@
  # @Description: autoupdate bucket:scoop-apps
  # @FilePath: /data/scoop-apps/autoupdate.sh
 ###
-
-# get bucket from rasa/scoop-directory
-gen_bucket_config(){
-    rm -f bucket.config
-    # import bucket-recommand.txt
-    cp -f "bucket-recommand.txt" bucket.config
-    # get bucket from rasa/scoop-directory
-    wget https://github.com/rasa/scoop-directory/raw/master/scoop_directory.db
-    if [ $? -eq 0 ];then
-        count=$(sqlite3 ./scoop_directory.db "select count(1) from buckets");
-        for((i=1;i<=$count;i++))
-        do
-            date_recode=$(sqlite3 ./scoop_directory.db "select updated from buckets where id = $i" | recode html)
-            sqlite3 ./scoop_directory.db "UPDATE buckets SET updated = '$date_recode' where id = $i"
-        done
-        check_date=$(date +"%y-%m-%d" -d '1 month ago')
-        bucket_urls=$(sqlite3 ./scoop_directory.db "select bucket_url from buckets where packages >= 10 and stars >= 5 and updated > '$check_date' and bucket_url not like '%ScoopInstaller/Main%' order by stars desc, updated desc, stars desc")
-        for bucket_url in ${bucket_urls[@]}; do
-            bucket_name=$(echo $bucket_url | awk -F'/' '{print $(NF-1)"/"$NF}')
-            echo "add bucket:$bucket_name"
-            echo "$bucket_name" >> bucket.config
-        done
-    fi
-    # bucket remove duplicate
-    awk ' !x[$0]++' bucket.config
-    # remove bucket-not-recommand.txt
-    not_recommand_buckets=$(cat bucket-not-recommand.txt)
-    for bucket in ${not_recommand_buckets[@]}
-    do
-        echo "remove bucket:$bucket"
-	grep -n "$bucket" bucket.config | awk -F':' '{print $1}' | xargs -n 1 -I num sed -i  'numd' bucket.config
-    done
-}
-
-# download bucket
-download_bucket(){
-    buckets=$(cat bucket.config)
-    script_buckets=$(tac bucket.config)
-    confuses=$(cat $script_dir/app.confuse)
-    for bucket in ${buckets[@]}
-    do
-        bucket_dir=$(echo $bucket | sed 's@/@-@g')
-        if [ ! -d "${cache_dir}/$bucket_dir" ]
-        then
-            echo "clone bucket:$bucket"
-            git clone --depth=1 https://github.com/$bucket ${cache_dir}/$bucket_dir
-        fi
-    done
-}
 # merge scripts
 merge_scripts(){
     rm -rf scripts/*
@@ -248,8 +199,6 @@ main(){
     create_cache_dir
     apt_init
     init_main # 生成用于过滤main仓库的file_id列表
-    gen_bucket_config
-    download_bucket
     merge_scripts
     merge_buckets
     update_readme
