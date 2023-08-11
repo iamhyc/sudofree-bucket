@@ -13,9 +13,19 @@
         "script": [
             "ren $dir\\deveco-studio-$version.exe $dir\\deveco-studio.7z",
             "Expand-7zipArchive \"$dir\\deveco-studio.7z\" \"$dir\"",
-            "Remove-Item \"$dir\\`$PLUGINSDIR\", \"$dir\\deveco-studio.7z\" -Force -Recurse"
+            "Remove-Item \"$dir\\`$PLUGINSDIR\", \"$dir\\deveco-studio.7z\" -Force -Recurse",
+            "Import-Module $(Join-Path $(Find-BucketDirectory -Root -Name sudofree-bucket) scripts/DoradoUtils.psm1)",
+            "Mount-ExternalRuntimeData -Source \"$persist_dir\\appdata\" -Target \"$env:APPDATA\\Huawei\\DevEcoStudio4.0\"",
+            "Remove-Module -Name DoradoUtils"
         ]
     },
+    "uninstaller": {
+        "script": [
+            "Import-Module $(Join-Path $(Find-BucketDirectory -Root -Name sudofree-bucket) scripts/DoradoUtils.psm1)",
+            "Dismount-ExternalRuntimeData -Target \"$env:APPDATA\\Huawei\\DevEcoStudio4.0\"",
+            "Remove-Module -Name DoradoUtils"
+        ]
+    }
     "bin": "bin\\devecostudio64.exe",
     "shortcuts": [
         ["bin\\devecostudio64.exe", "DevEco Studio"]
