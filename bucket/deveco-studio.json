@@ -25,7 +25,7 @@
             "Dismount-ExternalRuntimeData -Target \"$env:APPDATA\\Huawei\\DevEcoStudio4.0\"",
             "Remove-Module -Name DoradoUtils"
         ]
-    }
+    },
     "bin": "bin\\devecostudio64.exe",
     "shortcuts": [
         ["bin\\devecostudio64.exe", "DevEco Studio"]
