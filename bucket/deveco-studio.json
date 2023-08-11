@@ -1,0 +1,23 @@
+{
+    "homepage": "https://developer.harmonyos.com/cn/develop/deveco-studio",
+    "description": "面向全场景多设备，提供一站式的分布式应用开发平台，支持分布式多端开发、分布式多端调测、多端模拟仿真，全方位的质量与安全保障。",
+    "version": "4.0.0.400",
+    "architecture": {
+        "64bit": {
+            "url": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/9b/v3/2g1w9tlbQPevu9IkTNRhNw/devecostudio-windows-4.0.0.400.zip?HW-CC-KV=V1&HW-CC-Date=20230804T022932Z&HW-CC-Expire=315360000&HW-CC-Sign=23242113800451447FF87450B938F6B3A3B27A7360C10FBF7BCAB10B24473326",
+            "hash": "ae9b228fb1f79e99441e10bdcf347ebfc42266be8b170bbce3c9764ba32d82a4",
+            "extract_dir": "devecostudio-windows-4.0.0.400"
+        }
+    },
+    "installer": {
+        "script": [
+            "ren $dir\\deveco-studio-$version.exe $dir\\deveco-studio.7z",
+            "Expand-7zipArchive \"$dir\\deveco-studio.7z\" \"$dir\"",
+            "Remove-Item \"$dir\\`$PLUGINSDIR\", \"$dir\\deveco-studio.7z\" -Force -Recurse"
+        ]
+    },
+    "bin": "bin\\devecostudio64.exe",
+    "shortcuts": [
+        ["bin\\devecostudio64.exe", "DevEco Studio"]
+    ]
+}
