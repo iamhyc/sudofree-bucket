@@ -12,7 +12,9 @@
     "installer": {
         "script": [
             "ensure \"$persist_dir\" | Out-Null",
-            "New-Item \"$env:APPDATA\\Tencent\\WeMeet\" -ItemType Junction -Target \"$persist_dir\" | Out-Null"
+            "Import-Module $(Join-Path $(Find-BucketDirectory -Root -Name sudofree-bucket) scripts/DoradoUtils.psm1)",
+            "Mount-ExternalRuntimeData -Source \"$persist_dir\\appdata\" -Target \"$env:APPDATA\\Tencent\\WeMeet\"",
+            "Remove-Module -Name DoradoUtils",
         ]
     },
     "post_install": [
@@ -20,7 +22,11 @@
         "Remove-Item \"$dir\\wemeetapp_new.exe\" -Force -ErrorAction SilentlyContinue"
     ],
     "uninstaller": {
-        "script": "Remove-Item \"$env:APPDATA\\Tencent\\WeMeet\" -ErrorAction 'SilentlyContinue' -Force -Recurse"
+        "script": [
+            "Import-Module $(Join-Path $(Find-BucketDirectory -Root -Name sudofree-bucket) scripts/DoradoUtils.psm1)",
+            "Dismount-ExternalRuntimeData -Target \"$env:APPDATA\\Tencent\\WeMeet\"",
+            "Remove-Module -Name DoradoUtils"
+        ]
     },
     "shortcuts": [
         [
