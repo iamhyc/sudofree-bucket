@@ -6,7 +6,7 @@
         "64bit": {
             "url": "https://contentcenter-vali-drcn.dbankcdn.cn/pvt_2/DeveloperAlliance_package_901_9/9b/v3/2g1w9tlbQPevu9IkTNRhNw/devecostudio-windows-4.0.0.400.zip?HW-CC-KV=V1&HW-CC-Date=20230804T022932Z&HW-CC-Expire=315360000&HW-CC-Sign=23242113800451447FF87450B938F6B3A3B27A7360C10FBF7BCAB10B24473326",
             "hash": "ae9b228fb1f79e99441e10bdcf347ebfc42266be8b170bbce3c9764ba32d82a4",
-            "extract_dir": "devecostudio-windows-4.0.0.400"
+            "extract_dir": "devecostudio-windows-$version"
         }
     },
     "installer": {
