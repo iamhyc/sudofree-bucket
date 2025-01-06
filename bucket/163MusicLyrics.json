@@ -21,6 +21,6 @@
     ],
     "checkver": "github",
     "autoupdate": {
-        "url": "https://github.com/jitwxs/163MusicLyrics/releases/download/v$version/v$version-green.zip"
+        "url": "https://github.com/jitwxs/163MusicLyrics/releases/download/v$version/MusicLyricApp.v$version.pro.zip"
     }
 }
